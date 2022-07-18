@@ -14,7 +14,7 @@ echo "Index";
 include 'main.php';
 
 
-include 'footer.php';
+require_once 'footer.php';
 ?>
 </h2>
 </body>
