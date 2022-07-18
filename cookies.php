@@ -9,14 +9,29 @@
 </head>
 
 <body>
-  <?php
+  <h2>
+    <?php
 
-  echo "COOKIES"
+    $name = 'VistCount';
+
+    $content = $_COOKIE['VistCount'] + 1;
+
+    $expire = time() + (60 * 60);
+
+    setcookie($name, $content, $expire);
+
+    ?>
+
+    <?php
+
+    echo "<pre>";
+    print_r($_COOKIE);
 
 
+    ?>
+  </h2>
 
-
-  ?>
+  <h1>Cookeis</h1>
 </body>
 
 </html>
