@@ -53,3 +53,18 @@ if (isset($_POST['btnsave'])) {
 </body>
 
 </html>
+
+<hr>
+
+<?php
+
+$select = $pdo->prepare("select * from tbl_product");
+
+$select->execute();
+echo "<pre>";
+$row = $select->fetch();
+print_r($row);
+
+
+
+?>
