@@ -108,30 +108,48 @@ if (isset($_POST['btnsave'])) {
 
     <input id="save" type="submit" value="Cadastrar-se" name="btnsave">
   </form>
+  <br>
+
+  <table id="names">
+    <thead>
+      <th>id</th>
+      <th>Nomes</th>
+      <th>Sobre nomes</th>
+      <th>EDIT</th>
+      <th>DELITE</th>
+
+    </thead>
+    <tbody>
+      <?php
+
+      $select = $pdo->prepare("SELECT *from c_estudantes");
+
+      $select->execute();
+      while ($row = $select->fetch(PDO::FETCH_OBJ)) {
+
+        echo '
+        <tr>
+        <td>' . $row->id . '</td>
+        <td>' . $row->nome . '</td>
+        <td>' . $row->sobrenome . '</td>
+        
+        <td>    <button type="submit" value =""' . $row->id . '">EDIT</button></td>
+    
+        <td>        <button type="submit" value =""' . $row->id . '">DELITE</button></td>
+
+
+        </tr>
+        
+        ';
+      }
+
+
+
+
+      ?>
+    </tbody>
+
+  </table>
 </body>
 
 </html>
-
-<hr>
-
-<?php
-
-$select = $pdo->prepare("SELECT *from c_estudantes");
-
-$select->execute();
-while (
-  $row = $select->fetch(PDO::FETCH_ASSOC)
-) {
-  // echo $row[1] . "<br>"; FETCH_NUM
-  echo "<pre>";
-
-  echo $row['nome'];
-
-  // print_r($row);
-}
-
-
-
-
-
-?>
