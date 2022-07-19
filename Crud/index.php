@@ -3,34 +3,33 @@
 include 'dbconect.php';
 
 if (isset($_POST['btnsave'])) {
-  $pname = $_POST['txtname'];
-  $price = $_POST['txtprice'];
 
-  if (!empty($pname && $price)) {
+  $pname = $_POST['nome'];
+  $psobrenome = $_POST['sobrenome'];
 
-    $insert = $pdo->prepare("insert into tbl_product (productname,productprice)value(:name, :price)");
-    $insert->bindParam(':name', $pname);
-    $insert->bindParam(':price', $price);
+  if (!empty($pname && $psobrenome)) {
+    $insert = $pdo->prepare("insert into c_estudantes(nome, sobrenome)values(:nome,:sobrenome)");
 
+    $insert->bindParam('nome', $pname);
+    $insert->bindParam('sobrenome', $psobrenome);
     $insert->execute();
 
     if ($insert->rowCount()) {
-      echo 'Insert sucessful';
+
+      echo "Inseridos com sucesso";
     } else {
-      echo 'Insert Fail';
+
+      echo "Falha na insercao";
     }
   } else {
-    echo 'Faikds are Empty';
+    echo "Canpus Vazios";
   }
 }
-
-
 
 
 ?>
 
 
-<h2>PHP PDO CRUD OPRATIONS</h2>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,16 +38,75 @@ if (isset($_POST['btnsave'])) {
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Cadastro</title>
+
+  <style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .formulario {
+
+    background: blanchedalmond;
+    width: 500px;
+    position: relative;
+    left: 20rem;
+    padding: 4rem;
+    display: grid;
+    border-radius: 3rem;
+    margin-top: 150px;
+    place-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+  }
+
+  .formulario .inputinfo {
+    padding-left: 12px;
+    margin-top: 2rem;
+    background: whitesmoke;
+  }
+
+
+  #save {
+    cursor: pointer;
+    margin-top: 3rem;
+    background: black;
+    color: white;
+  }
+
+  #save:hover {
+    background: DarkBlue;
+  }
+
+  .formulario input {
+
+    border: none;
+    border-radius: 8px;
+
+    width: 300px;
+    height: 35px;
+  }
+  </style>
 </head>
 
 <body>
 
-  <form action="" method="post">
-    <p><input type="text" name="txtname" placeholder="ProductName"></p>
-    <p><input type="text" name="txtprice" placeholder="productPrice"></p>
+  <form class="formulario" action="" method="post">
 
-    <input type="submit" value="Save" name="btnsave">
+    <h2>Cadastro de Estudantes</h2>
+    <p>
+      <input class="inputinfo" type="text" name="nome" placeholder="Digite seu Nome">
+
+    </p>
+
+    <p>
+      <input class="inputinfo" type="text" name="sobrenome" placeholder="Digite o seu sobrenome">
+    </p>
+
+    <input id="save" type="submit" value="Cadastrar-se" name="btnsave">
   </form>
 </body>
 
@@ -58,12 +116,17 @@ if (isset($_POST['btnsave'])) {
 
 <?php
 
-$select = $pdo->prepare("select * from tbl_product");
+$select = $pdo->prepare("SELECT *from c_estudantes");
 
 $select->execute();
-echo "<pre>";
-$row = $select->fetch();
-print_r($row);
+while (
+  $row = $select->fetch()
+) {
+  echo "<pre>";
+  print_r($row);
+}
+
+
 
 
 

@@ -11,7 +11,7 @@
 <body>
   <?php
 
-  $pdo = new PDO('mysql:host=localhost;dbname=crud_db', 'root', '');
+  $pdo = new PDO('mysql:host=localhost;dbname=cadastro', 'root', '');
 
   ?>
 </body>
