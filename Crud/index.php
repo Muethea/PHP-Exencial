@@ -120,10 +120,14 @@ $select = $pdo->prepare("SELECT *from c_estudantes");
 
 $select->execute();
 while (
-  $row = $select->fetch()
+  $row = $select->fetch(PDO::FETCH_ASSOC)
 ) {
+  // echo $row[1] . "<br>"; FETCH_NUM
   echo "<pre>";
-  print_r($row);
+
+  echo $row['nome'];
+
+  // print_r($row);
 }
 
 
